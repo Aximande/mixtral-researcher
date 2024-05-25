@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 import validators
 
-sys.path.append("../gpt_researcher_local")
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'gpt_researcher_local')))
 from gpt_researcher.master.agent import GPTResearcher
 
 
