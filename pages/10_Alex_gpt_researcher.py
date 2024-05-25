@@ -22,6 +22,7 @@ async def generate_report(query, report_type, sources=None):
         )
     else:
         researcher = GPTResearcher(query=query, report_type=report_type)
+
     progress_bar = st.progress(0)
     progress_text = st.empty()
     await researcher.conduct_research()
@@ -49,11 +50,15 @@ def main():
         '<div class="header">GPTResearcher Report Generator</div>',
         unsafe_allow_html=True,
     )
-    query = st.text_input("Enter your query:")
+    query = st.text_input(
+        "Enter your query:",
+        placeholder="Analyse the latest developments in Autonomous Cars based on Arxiv and Google Scholar only"
+    )
     report_type = st.selectbox(
         "Select the type of report:",
         ["research_report", "resource_report", "outline_report", "custom_report"],
     )
+
     research_option = st.radio(
         "Select research option:",
         ("Web Search", "Specific URLs")
@@ -72,6 +77,9 @@ def main():
                     try:
                         with st.spinner("Generating report..."):
                             report = asyncio.run(generate_report(query, report_type, sources))
+                    except Exception as e:
+                        st.error(f"An error occurred: {str(e)}")
+                    else:
                         st.markdown(
                             '<div class="subheader">Generated Report</div>',
                             unsafe_allow_html=True,
@@ -83,8 +91,6 @@ def main():
                             file_name=f"{report_type}.txt",
                             mime="text/plain",
                         )
-                    except Exception as e:
-                        st.error(f"An error occurred: {str(e)}")
     else:
         if st.button("Generate Report"):
             if not query:
@@ -93,6 +99,9 @@ def main():
                 try:
                     with st.spinner("Generating report..."):
                         report = asyncio.run(generate_report(query, report_type))
+                except Exception as e:
+                    st.error(f"An error occurred: {str(e)}")
+                else:
                     st.markdown(
                         '<div class="subheader">Generated Report</div>',
                         unsafe_allow_html=True,
@@ -104,8 +113,6 @@ def main():
                         file_name=f"{report_type}.txt",
                         mime="text/plain",
                     )
-                except Exception as e:
-                    st.error(f"An error occurred: {str(e)}")
 
 if __name__ == "__main__":
     main()
