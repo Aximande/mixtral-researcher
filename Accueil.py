@@ -1,5 +1,4 @@
 import streamlit as st
-from PIL import Image
 import os
 
 # Set page configuration
@@ -10,9 +9,6 @@ st.set_page_config(
     initial_sidebar_state="auto",
 )
 
-# Load the Mistral AI logo
-logo_path = os.path.join("static", "mistral_ai_logo.png")
-mistral_logo = Image.open(logo_path)
 
 # Create the homepage layout
 st.title("Welcome to the Mistral AI Hackathon!")
