@@ -25,8 +25,6 @@ with left_col:
         "We're excited to showcase our custom adaptation of the GPT Researcher code, designed to empower researchers and scientists in their work."
     )
 
-with center_col:
-    st.image(mistral_logo, width=200)
 
 with right_col:
     st.header("Key Features")
