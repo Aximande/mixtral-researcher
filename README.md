@@ -1,4 +1,1 @@
 # mixtral-researcher
-
-
-## Introduction
